@@ -27,8 +27,6 @@ CREATE TABLE User (
     is_admin BOOLEAN,
     creation_date DATE not null,
     primary key (user_id),
-
-
 );
 
 CREATE TABLE Campsite (
