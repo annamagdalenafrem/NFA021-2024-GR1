@@ -15,7 +15,7 @@ Remember, every adventure begins with a single click!
 
 # Database Structure
 ## Table: listing
-CREATE TABLE listing(
+CREATE TABLE user(
     
 )
 
