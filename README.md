@@ -28,7 +28,7 @@ Price category (price_category_id, weekday_price, weekend_price, highseason_pric
 
 Review (review_id, rating, review text, date_posted, #campsite_id)
 
-Campsite_Price_Category (#campsite_id, #price_category_id, price)
+Campsite_Price (#campsite_id, #price_category_id, price)
 
 ## Table: listing
 CREATE TABLE User (
