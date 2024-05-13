@@ -31,6 +31,69 @@ Review (review_id, rating, review text, date_posted, #campsite_id)
 Campsite_Price (#campsite_id, #price_category_id, price)
 
 ## Table: listing
+create user 'anna magadalena'@'localhost' identified by 'password1';
+grant select, update, delete, insert on td1.* to 'anna magadalena'@'localhost';
+
+create user 'elie'@'localhost' identified by 'password2';
+grant select, update, delete, insert on td1.* to 'elie'@'localhost';
+
+create user 'miled'@'localhost' identified by 'password3';
+grant select, update, delete, insert on td1.* to 'miled'@'localhost';
+
+create user 'charbel'@'localhost' identified by 'password4';
+grant select, update, delete, insert on td1.* to 'charbel'@'localhost';
+
+flush privileges;
+
+create database campingsite;
+
+use campingsite;
+
+
+create table `user` (
+    `user_id` int not null auto_increment,
+    `first_name` varchar(15) not null,
+    `last_name` varchar(30) not null,
+    `email` varchar(50) not null,
+    `user_password` varchar(20) not null,
+    `phone_number` varchar(15) not null,
+    `user_address` varchar(255),
+    `username` varchar(25) not null unique,
+    `is_admin` boolean,
+    `creation_date` date not null,
+    primary key (`user_id`)
+);
+
+create table `category`(
+   `category_id` int not null auto_increment,
+   `category_name` varchar(255) not null,
+   primary key(`category_id`)
+);
+
+create table `campsite` (
+   `campsite_id` int not null auto_increment,
+   `campsite_name` varchar(255),
+   `capacity` int,
+   `category_id` int not null,
+   primary key(`campsite_id`)
+);
+
+alter table `campsite` 
+    add constraint `fk_category` foreign key (`category_id`) references `category`(`category_id`);
+
+create table `location` (
+    `location_id` int not null auto_increment,
+    `city` varchar(20) not null,
+    `district` varchar(60) not null,
+    `gouvernorate` varchar(60) not null,
+    `latitude` float not null,
+    `longitude` float not null,
+    `campsite_id` int not null,
+    primary key(`location_id`)
+);
+
+alter table `location`
+    add constraint `fk_campsite`foreign key (`campsite_id`) references `campsite`(`campsite_id`);
 
 
 
