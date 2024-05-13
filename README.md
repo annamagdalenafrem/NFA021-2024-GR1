@@ -95,6 +95,53 @@ create table `location` (
 alter table `location`
     add constraint `fk_campsite`foreign key (`campsite_id`) references `campsite`(`campsite_id`);
 
+    create table `review` (
+    `review_id` int not null auto_increment,
+    `rating` int,
+    `review_text` varchar(255),
+    `date_posted` date not null,
+    `campsite_id` int not null,
+    `user_id` int not null,
+    primary key(`review_id`)
+);
+
+alter table `review`
+    add constraint `fk_campsite_review`foreign key (`campsite_id`) references `campsite`(`campsite_id`),
+    add constraint `fk_user_review` foreign key (`user_id`) references `user`(`user_id`) ;
+
+create table `reservation` (
+    `reservation_id` int not null auto_increment,
+    `total_price` decimal(10, 2) not null,
+    `from_date` date not null,
+    `to_date` date not null,
+    `user_id` int not null,
+    `campsite_id` int not null,
+    primary key(`reservation_id`)
+);
+
+alter table `reservation`
+    add constraint `fk_user_reservation`foreign key (`user_id`) references `user`(`user_id`) ,
+    add constraint `fk_campsite_reservation`foreign key (`campsite_id`) references `campsite`(`campsite_id`);
+
+create table `price_category` (
+    `price_category_id` int not null auto_increment,
+    `weekday_price` int not null,
+    `weekend_price` int not null,
+    `highseason_price` int not null,
+    primary key(`price_category_id`)
+);
+
+create table `campsite_price`(
+    `campsite_id` int not null,
+    `price_category_id` int not null,
+    `price` int,
+    primary key(`campsite_id`, `price_category_id`)
+);
+
+alter table `campsite_price`
+    add constraint `fk_campsite_price` foreign key (`campsite_id`) references `campsite`(`campsite_id`) ,
+    add constraint `fk_price`foreign key (`price_category_id`) references `price_category`(`price_category_id`);
+
 
 
 # Meet Link
